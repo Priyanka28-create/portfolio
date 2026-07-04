@@ -366,6 +366,11 @@ body {
     border: 1px solid var(--border);
     color: var(--text);
 }
+.live-demo {
+    background: linear-gradient(135deg, #7c3aed, #3478f6) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
 
 .project-btn:hover {
     background: var(--gradient);
