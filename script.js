@@ -164,3 +164,42 @@ document.querySelectorAll('.project-card').forEach(card => {
 document.querySelectorAll('.skill-card').forEach((card, i) => {
     card.style.transitionDelay = (i * 0.05) + 's';
 });
+
+// Contact Form - opens the visitor's email client with a prefilled message
+const CONTACT_EMAIL = 'priyankarajendran70659@gmail.com';
+const contactSendBtn = document.getElementById('contactSendBtn');
+
+if (contactSendBtn) {
+    contactSendBtn.addEventListener('click', () => {
+        const nameEl = document.getElementById('contactName');
+        const emailEl = document.getElementById('contactEmail');
+        const messageEl = document.getElementById('contactMessage');
+        const statusEl = document.getElementById('contactStatus');
+
+        const name = nameEl.value.trim();
+        const email = emailEl.value.trim();
+        const message = messageEl.value.trim();
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!name || !email || !message) {
+            statusEl.textContent = 'Please fill in your name, email, and message.';
+            statusEl.style.color = '#ef4444';
+            return;
+        }
+        if (!emailPattern.test(email)) {
+            statusEl.textContent = 'Please enter a valid email address.';
+            statusEl.style.color = '#ef4444';
+            return;
+        }
+
+        const subject = `Portfolio contact from ${name}`;
+        const body = `${message}\n\n— ${name} (${email})`;
+        const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoLink;
+
+        statusEl.textContent = 'Opening your email app to send this message…';
+        statusEl.style.color = '#22c55e';
+    });
+}
